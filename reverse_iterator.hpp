@@ -12,10 +12,7 @@ namespace ft
     /*
      * reverse_iterator
      * https://en.cppreference.com/w/cpp/iterator/reverse_iterator
-     * bidirectional iterator와 똑같은데, 거꾸로 한거다.
-     * stl_iterator.h 66번줄에 있다. 레퍼런스는 뭐 이상하게 생겼다.
-     * iterator base에서 상속받는데, 그 속성은 iterator_traits에서 받아온다.
-     * 그냥 포인터 연산을 잘 해주면 된다.
+     * stl_iterator.h 66번줄에 있다. 레퍼런스는 큰 도움 안된다. 코드를 보자.
      */
     template <typename _Iterator>
     class reverse_iterator : public ft::iterator<typename ft::iterator_traits<_Iterator>::iterator_category, \
