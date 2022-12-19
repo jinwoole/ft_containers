@@ -7,6 +7,8 @@
 
 #include "iterator_base.hpp"
 
+int a;
+
 namespace ft
 {
     /*
@@ -40,13 +42,15 @@ namespace ft
          * 다른 리버스 이터레이터로부터 이터레이터를 만들고, 인자로 받은 것과 당연히 같아야지
          * template <class Iter> reverse_iterator (const reverse_iterator<Iter>& rev_it);
          */
+        iterator_type base() const { return current; } //아래에서  쓰인다
+
         reverse_iterator() {}
         explicit reverse_iterator(iterator_type __x) : current(__x) {}
         reverse_iterator(const reverse_iterator& __x) : current(__x) { }
+
         template<typename _Iter>
         reverse_iterator(const reverse_iterator<_Iter>& __x) : current(__x.base()) {}
 
-        iterator_type base() const { return current; } //아래에서 쓰인다
 
         //연산자 오버라이드
         reference operator*() const

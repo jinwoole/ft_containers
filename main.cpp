@@ -2,6 +2,7 @@
 #include <vector>
 #include "./type_traits.hpp"
 #include "./reverse_iterator.hpp"
+#include <list>
 //enable_if test
 template<typename T, typename ft::enable_if<ft::is_integral<T>::value, int>::type = 0>
 void foo(void) { std::cout << "true\n"; }
@@ -28,28 +29,34 @@ void test_reverse_iterator()
     // Check if the reverse iterator is pointing to the last element in the vector
     if (*rit != 5) {
         std::cout << "Unexpected value at reverse iterator: expected 5, got " << *rit << std::endl;
-        __flag == 1;
+        __flag++;
     }
     // Check if the reverse iterator can be incremented and still point to the correct element
     ++rit;
     if (*rit != 4) {
         std::cout << "Unexpected value at reverse iterator after increment: expected 4, got " << *rit << std::endl;
-        __flag == 1;
+        __flag++;
     }
     // Check if the reverse iterator can be decremented and still point to the correct element
     --rit;
     if (*rit != 5) {
         std::cout << "Unexpected value at reverse iterator after decrement: expected 5, got " << *rit << std::endl;
-        __flag == 1;
+        __flag++;
+    }
+    std::reverse_iterator<std::vector<int>::iterator> val(v.begin() + 1);
+    ft::reverse_iterator<std::vector<int>::iterator> ft_val(v.begin() + 1);
+    if (*val != *ft_val || *(val.base()) != *(ft_val.base())) {
+        std::cout << "Unexpected value at reverse iterator or .base()\n";
+        __flag++;
     }
     if (__flag == 0)
         std::cout << "test passed\n";
+    else
+        std::cout << "test failed\n";
 }
 
 
 int main() {
-
-
     //enable_if test
     std::cout << "[enable_if test]" << std::endl;
     foo<char>();

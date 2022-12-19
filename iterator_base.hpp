@@ -130,7 +130,5 @@ namespace ft {
         typedef Reference   reference; //레퍼런스 나타내는 타입
         typedef Category    iterator_category; //이터레이터의 종류
     };
-
-
 }
 #endif //FT_CONTAINERS_ITERATOR_HPP
