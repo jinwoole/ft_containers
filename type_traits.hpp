@@ -3,9 +3,6 @@
  * 1. enable_if
  * 2. is_integral
 */
-
-#include <type_traits>
-
 #ifndef FT_CONTAINERS_ENABLE_IF_HPP
 #define FT_CONTAINERS_ENABLE_IF_HPP
 
