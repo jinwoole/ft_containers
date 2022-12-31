@@ -3,7 +3,9 @@
 #include "./type_traits.hpp"
 #include "./reverse_iterator.hpp"
 #include "./pair.hpp"
+#include "./equal_lexico.hpp"
 #include <list>
+#include <random>
 #include <utility>
 
 //enable_if test
@@ -53,11 +55,10 @@ void test_reverse_iterator()
         __flag++;
     }
     if (__flag == 0)
-        std::cout << "test passed\n";
+        std::cout << "Reverse Iterator test passed!\n";
     else
-        std::cout << "test failed\n";
+        std::cout << "Reverse Iterator test failed!!!\n";
 }
-
 //pair_test
 void pair_test()
 {
@@ -87,6 +88,48 @@ void pair_test()
     else if (flag == 1)
         std::cout << "!! Pair test Failed!!!\n";
 }
+//equal_test + lexicographical
+void equal_test()
+{
+    int flag = 0;
+    int myints[] = {20, 40, 60, 80, 100};
+    std::vector<int> myvector (myints, myints + 5);
+
+    if (!(ft::equal (myvector.begin(), myvector.end(), myints)))
+        flag = 1;
+
+    myvector[3] = 81;
+
+    if (ft::equal (myvector.begin(), myvector.end(), myints))
+        flag = 1;
+
+    if (flag == 1)
+        std::cout << "ft::equal is fuc*ed\n";
+    else
+        std::cout << "Equal test passed!\n";
+
+    //======================================
+
+    char foo[]="Apple";
+    char bar[]="apartment";
+    char f_foo[]="super";
+    char f_bar[]="zzzzz";
+
+    std::cout << std::boolalpha;
+    if (ft::lexicographical_compare(foo,foo+5,bar,bar+9) !=
+    (std::lexicographical_compare(foo,foo+5,bar,bar+9)))
+        std::cout << "Lexicographical test failed!!\n";
+    else if (ft::lexicographical_compare(f_foo,f_foo+5,bar,bar+9) != false)
+        //비교연산자는 <다. 그래서, r < e -> false
+        std::cout << "Lexicographical test failed!!\n";
+    else if (ft::lexicographical_compare(f_foo,f_foo+2,f_bar,f_bar+5) != true)
+        // u < z 는 true
+        std::cout << "Lexicographical test failed!!\n";
+    else
+        std::cout << "Lexicographical test passed!\n";
+
+
+}
 
 
 int main() {
@@ -108,9 +151,11 @@ int main() {
     std::cout << factorial<5>::value << std::endl;
 
     //reverse_iterator test
-    std::cout << "[reverse_iterator test]" << std::endl;
     test_reverse_iterator();
 
     //pair test
     pair_test();
+
+    //equal test
+    equal_test();
 }
