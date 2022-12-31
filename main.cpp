@@ -2,7 +2,10 @@
 #include <vector>
 #include "./type_traits.hpp"
 #include "./reverse_iterator.hpp"
+#include "./pair.hpp"
 #include <list>
+#include <utility>
+
 //enable_if test
 template<typename T, typename ft::enable_if<ft::is_integral<T>::value, int>::type = 0>
 void foo(void) { std::cout << "true\n"; }
@@ -55,13 +58,43 @@ void test_reverse_iterator()
         std::cout << "test failed\n";
 }
 
+//pair_test
+void pair_test()
+{
+    ft::pair <int, int> foo;
+    ft::pair <int, int> bar;
+    std::pair <int, int> real_bar;
+    int flag = 0;
+
+    foo = ft::make_pair(10, 20);
+    bar = ft::make_pair(10.5, 'A'); //암시적 형변환이 되는가?
+    real_bar = std::make_pair(10.5, 'A');
+
+    ft::pair <int, char> copy(bar); //복사생성자가 작동하는가?
+
+    //std::cout << copy.first << " " << copy.second << "\n";
+    //std::cout << bar.first << " " << bar.second << "\n";
+    //std::cout << real_bar.first << " " << real_bar.second << "\n";
+
+    if (foo.first != 10 || foo.second != 20)
+        flag = 1;
+    if (bar.first != real_bar.first || bar.second != real_bar.second)
+        flag = 1;
+    if (copy.first != 10 || copy.second != 'A')
+        flag = 1;
+    if (flag == 0)
+        std::cout << "Pair test passed!\n";
+    else if (flag == 1)
+        std::cout << "!! Pair test Failed!!!\n";
+}
+
 
 int main() {
     //enable_if test
     std::cout << "[enable_if test]" << std::endl;
     foo<char>();
     foo<int>();
-    //foo<float>();은 컴파일 오류가 난다. 왜냐하면 integral계열이 아니면, enable_if가 이건 적합하지 않다고 판단, 인스턴스화하지 않기 때문이다.
+    //foo<float>(); 는 컴파일 오류가 난다. 왜냐하면 integral계열이 아니면, enable_if가 이건 적합하지 않다고 판단, 인스턴스화하지 않기 때문이다.
 
     // is_integral test
     std::cout << std::boolalpha;
@@ -77,4 +110,7 @@ int main() {
     //reverse_iterator test
     std::cout << "[reverse_iterator test]" << std::endl;
     test_reverse_iterator();
+
+    //pair test
+    pair_test();
 }
