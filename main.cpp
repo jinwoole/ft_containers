@@ -94,12 +94,10 @@ void equal_test()
     int flag = 0;
     int myints[] = {20, 40, 60, 80, 100};
     std::vector<int> myvector (myints, myints + 5);
-
     if (!(ft::equal (myvector.begin(), myvector.end(), myints)))
         flag = 1;
 
     myvector[3] = 81;
-
     if (ft::equal (myvector.begin(), myvector.end(), myints))
         flag = 1;
 
@@ -107,9 +105,7 @@ void equal_test()
         std::cout << "ft::equal is fuc*ed\n";
     else
         std::cout << "Equal test passed!\n";
-
     //======================================
-
     char foo[]="Apple";
     char bar[]="apartment";
     char f_foo[]="super";
@@ -127,8 +123,6 @@ void equal_test()
         std::cout << "Lexicographical test failed!!\n";
     else
         std::cout << "Lexicographical test passed!\n";
-
-
 }
 
 
