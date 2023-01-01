@@ -12,7 +12,6 @@
  *  1.2 Distance struct
  * 2. iterator_traits
  * 3. Iterators
- *  3.1 bidirectinal iterator 와 리버스 만들 차례!
  */
 
 namespace ft {

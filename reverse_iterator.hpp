@@ -7,8 +7,6 @@
 
 #include "iterator_base.hpp"
 
-int a;
-
 namespace ft
 {
     /*
@@ -16,21 +14,21 @@ namespace ft
      * https://en.cppreference.com/w/cpp/iterator/reverse_iterator
      * stl_iterator.h 66번줄에 있다. 레퍼런스는 큰 도움 안된다. 코드를 보자.
      */
-    template <typename _Iterator>
-    class reverse_iterator : public ft::iterator<typename ft::iterator_traits<_Iterator>::iterator_category, \
-                                                typename ft::iterator_traits<_Iterator>::value_type, \
-                                                typename ft::iterator_traits<_Iterator>::difference_type, \
-                                                typename ft::iterator_traits<_Iterator>::pointer, \
-                                                typename ft::iterator_traits<_Iterator>::reference>
+    template <typename Iterator>
+    class reverse_iterator : public ft::iterator<typename ft::iterator_traits<Iterator>::iterator_category, \
+                                                typename ft::iterator_traits<Iterator>::value_type, \
+                                                typename ft::iterator_traits<Iterator>::difference_type, \
+                                                typename ft::iterator_traits<Iterator>::pointer, \
+                                                typename ft::iterator_traits<Iterator>::reference>
     {
     private:
-        _Iterator current;
+        Iterator current;
 
     public:
-        typedef _Iterator                                                   iterator_type;
-        typedef typename ft::iterator_traits<_Iterator>::difference_type    difference_type;
-        typedef typename ft::iterator_traits<_Iterator>::reference          reference;
-        typedef typename ft::iterator_traits<_Iterator>::pointer            pointer;
+        typedef Iterator                                                   iterator_type;
+        typedef typename ft::iterator_traits<Iterator>::difference_type    difference_type;
+        typedef typename ft::iterator_traits<Iterator>::reference          reference;
+        typedef typename ft::iterator_traits<Iterator>::pointer            pointer;
 
 
         /* Constructor of reverse_iterator
@@ -55,7 +53,7 @@ namespace ft
         //연산자 오버라이드
         reference operator*() const
         {
-            _Iterator __tmp = current;
+            Iterator __tmp = current;
             return *(--__tmp);
         }
 
@@ -83,6 +81,7 @@ namespace ft
             return __tmp;
         }
 
+        //어디 써놓은것 같은데... 아무튼 difference_type은 두 이터레이터 차이 나타내는 타입이고, 사실상 그냥 ptrdiff다.
         reverse_iterator operator+(difference_type __n) const
         {
             return reverse_iterator(current - __n);
